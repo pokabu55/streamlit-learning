@@ -41,6 +41,9 @@ streamlitを勉強してみる
 * [別の記事](https://qiita.com/SatoshiTerasaki/items/f1724d68deecdc14103f#%E5%BF%85%E8%A6%81%E3%81%AA%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%92%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88)
 * [pythonのOpenCVのサンプル](https://camp.trainocate.co.jp/magazine/python-opencv/)
 
+## 画像ファイルの読み込み
+* [ここ](https://cafe-mickey.com/python/streamlit-6/)
+
 ## VSCode での拡張機能
 http://trelab.info/visual-studio-code/python-vscode%E3%81%A7autopep8%E3%82%92%E9%81%A9%E7%94%A8%E3%81%99%E3%82%8B/
 https://qiita.com/firedfly/items/00c34018581c6cec9b84
