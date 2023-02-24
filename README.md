@@ -1,13 +1,15 @@
 # streamlit-learning
 streamlitを勉強してみる
 
+まずは、下記 #2 のサイトで、Streamlit をサクッと勉強してみる！
+
 # 自分で事前に調べたリンク集
-* まずは、[公式](https://streamlit.io/)
-* [ブラウザで動くリアルタイム画像/音声処理アプリをStreamlitでサクッと作る](https://zenn.dev/whitphx/articles/streamlit-realtime-cv-app)
-* [Python だけで作る Web アプリケーション(フロントエンド編)](https://zenn.dev/alivelimb/books/python-web-frontend)
-* [Web カメラで得た画像を Streamlit 上で表示する](https://qiita.com/SatoshiTerasaki/items/f1724d68deecdc14103f)
-* [StreamlitでWebアプリ開発！インストールからデプロイまで徹底解説](https://camp.trainocate.co.jp/magazine/streamlit-web/)
-* [Streamlit入門 – ウィジェットの使い方(前編)](https://data-analytics.fun/2022/06/26/streamlit-widget-1/)
+1. まずは、[公式](https://streamlit.io/)
+2. [ブラウザで動くリアルタイム画像/音声処理アプリをStreamlitでサクッと作る](https://zenn.dev/whitphx/articles/streamlit-realtime-cv-app)
+3. [Python だけで作る Web アプリケーション(フロントエンド編)](https://zenn.dev/alivelimb/books/python-web-frontend)
+4. [Web カメラで得た画像を Streamlit 上で表示する](https://qiita.com/SatoshiTerasaki/items/f1724d68deecdc14103f)
+5. [StreamlitでWebアプリ開発！インストールからデプロイまで徹底解説](https://camp.trainocate.co.jp/magazine/streamlit-web/)
+6. [Streamlit入門 – ウィジェットの使い方(前編)](https://data-analytics.fun/2022/06/26/streamlit-widget-1/)
 
 # PYTHON 環境構築
 ## 事前準備
@@ -34,6 +36,17 @@ streamlitを勉強してみる
 ## webカメラを使う場合
 * opencv のインストール：`pip install opencv-python`
 * streamlit-webrtc のインストール：`pip install streamlit-webrtc`
+
+## OpenCVについて
+* 下記のようにビルド版は4種類あるらしい。[出典。](https://a244.hateblo.jp/entry/2018/09/04/190000)
+* ここでは、サーバー版の-headless 版でもよいのかな？
+
+|packege name|explanation|
+|:---:|---|
+|opencv-python|通常版|
+|opencv-python-headless|上記のGUI関連を無効にしたパッケージ。サーバー環境向け。|
+|opencv-contrib-python|contributorによって寄贈された拡張モジュール群。比較的最新のアルゴリズム、試験的な機能を含む。|
+|opencv-contrib-python-headless|上記のGUI関連を無効にしたパッケージ。サーバー環境向け|
 
 ### 参考サイト
 * [streamlit-webrtcのサンプル記事](https://qiita.com/kotai2003/items/fe7dedd03ed049ac0265)まずはここ。
