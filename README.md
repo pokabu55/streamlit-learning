@@ -73,3 +73,9 @@ https://qiita.com/momotar47279337/items/73157407ae824751afc4
 * 実行方法
   * `$streamlit run app.py`
   * これで、ブラウザが自動起動して、hello world! と書かれたページを表示する。
+
+# Webカメラによるリアルタイム画像処理
+## 参考ソースコード
+* 上記の参考リンクの#2を参考に実装してみる
+* [ブラウザで動くリアルタイム画像/音声処理アプリをStreamlitでサクッと作る](https://zenn.dev/whitphx/articles/streamlit-realtime-cv-app)
+* camera-app.py に実装する
