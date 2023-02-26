@@ -70,12 +70,3 @@ if erosion:
     kernel = np.ones((5,5),np.uint8)
     erodedimage = cv2.erode(th5,kernel,iterations = 1)
     col1.image(erodedimage)
-
-'''
-基本は、以下を参照
-https://cafe-mickey.com/python/streamlit-6/
-
-もうちょっと複雑なコードは
-https://enjoy-life-fullest.com/2022/04/07/%E3%80%90python%E3%80%91opencv%E3%81%A8streamlit%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E7%B2%92%E5%AD%90%E3%81%AE%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86%E3%82%92%E8%A1%8C%E3%81%86/
-
-'''

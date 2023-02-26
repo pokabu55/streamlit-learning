@@ -10,6 +10,7 @@ streamlitを勉強してみる
 4. [Web カメラで得た画像を Streamlit 上で表示する](https://qiita.com/SatoshiTerasaki/items/f1724d68deecdc14103f)
 5. [StreamlitでWebアプリ開発！インストールからデプロイまで徹底解説](https://camp.trainocate.co.jp/magazine/streamlit-web/)
 6. [Streamlit入門 – ウィジェットの使い方(前編)](https://data-analytics.fun/2022/06/26/streamlit-widget-1/)
+7. [OpenCVとStreamlitを使用して粒子の画像処理を行う](https://enjoy-life-fullest.com/2022/04/07/%E3%80%90python%E3%80%91opencv%E3%81%A8streamlit%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E7%B2%92%E5%AD%90%E3%81%AE%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86%E3%82%92%E8%A1%8C%E3%81%86/)
 
 # PYTHON 環境構築
 ## 事前準備
@@ -79,3 +80,15 @@ https://qiita.com/momotar47279337/items/73157407ae824751afc4
 * 上記の参考リンクの#2を参考に実装してみる
 * [ブラウザで動くリアルタイム画像/音声処理アプリをStreamlitでサクッと作る](https://zenn.dev/whitphx/articles/streamlit-realtime-cv-app)
 * camera-app.py に実装する
+
+# アップロード画像による画像処理
+## 参考ソースコード
+* 上記参考リンクの#7を参考に実装してみる
+* [OpenCVとStreamlitを使用して粒子の画像処理を行う](https://enjoy-life-fullest.com/2022/04/07/%E3%80%90python%E3%80%91opencv%E3%81%A8streamlit%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E7%B2%92%E5%AD%90%E3%81%AE%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86%E3%82%92%E8%A1%8C%E3%81%86/)
+* image-upload-app.py に実装する
+
+### 以下も参考にしながら実装した
+* [ファイルアップローダーを使う](https://cafe-mickey.com/python/streamlit-6/)
+* [公式のsidebarの説明](https://docs.streamlit.io/library/api-reference/layout/st.sidebar)
+* [ここも参考になりそうかも](https://blog.amedama.jp/entry/streamlit-tutorial)
+* [with構文の説明](https://it-biz.online/python/with/)
