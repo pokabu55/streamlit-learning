@@ -1,0 +1,7 @@
+!.gitignore
+
+/bin/
+/examples/
+*.o
+*.d
+
