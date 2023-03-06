@@ -8,7 +8,7 @@ from pathlib import Path
 
 import subprocess
 
-def image_processing(srcImage, processName):
+def image_processing(srcImagePIL, processName):
     # 画像処理のメイン関数的な
 
     # 処理画像をネイティブで処理できるようにファイル出力
@@ -16,17 +16,21 @@ def image_processing(srcImage, processName):
     tmpDstFileName = "./tmp/dstImg.png"
 
     # 何か処理してみるか
-    procImageCV = pil2cv(srcImage)
-    srcImage.save(tmpSrcFileName)
+    #srcImageCV = pil2cv(srcImagePIL)
+    srcImagePIL.save(tmpSrcFileName)
     # エラー処理は？
 
     # ネイティブアプリを呼び出す
     subprocess.call("./modules/sample/bin/sample")
 
-    # 出力画像作成
-    dstImage = cv2.cvtColor(procImageCV, cv2.COLOR_BGR2RGB)
+    # 画像データを一旦取得してから表示する場合
+    dstImagePIL = Image.open(tmpDstFileName)
+    dstImageCV = pil2cv(dstImagePIL)
 
-    return dstImage
+    # 出力画像作成
+    dstImageCV= cv2.cvtColor(dstImageCV, cv2.COLOR_BGR2RGB)
+
+    return dstImageCV
 
 def pil2cv(image):
     ''' PIL型 -> OpenCV型 '''
@@ -48,17 +52,20 @@ def main():
         # 画像ファイルを直接指定する場合
         #st.image(uploaded_image)
         # 画像データを一旦取得してから表示する場合
-        originalImage = Image.open(uploaded_image)
+        originalImagePIL = Image.open(uploaded_image)
 
         # use_column_widh を False にすると、オリジナルのサイズで表示
         # これは、選択したいね
-        st.image(originalImage, caption="original image", use_column_width=True)
+        st.image(originalImagePIL, caption="original image", use_column_width=True)
 
         # 処理
-        dispImage = image_processing(originalImage, "threthold")
+        image_processing(originalImagePIL, "threthold")
+
+        # 結果表示
+        dstImagePIL = Image.open("./tmp/dstImg.png")
 
         # 2個めの画像を開けば勝手に縦並びになっとる
-        st.image(dispImage, caption="processed image", use_column_width=True)
+        st.image(dstImagePIL, caption="processed image", use_column_width=True)
 
 if __name__ == "__main__":
     main()
