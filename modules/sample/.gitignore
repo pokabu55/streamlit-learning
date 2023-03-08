@@ -3,4 +3,4 @@
 /examples/
 *.o
 *.d
-
+bin/*
