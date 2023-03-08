@@ -95,3 +95,8 @@ https://qiita.com/momotar47279337/items/73157407ae824751afc4
 * [公式のsidebarの説明](https://docs.streamlit.io/library/api-reference/layout/st.sidebar)
 * [ここも参考になりそうかも](https://blog.amedama.jp/entry/streamlit-tutorial)
 * [with構文の説明](https://it-biz.online/python/with/)
+
+### 複数ディレクトリのソースでビルドする方法
+* [基本](http://urin.github.io/posts/2013/simple-makefile-for-clang)
+* [Makefile 別ディレクトリに中間ファイル & 自動依存関係設定](https://d-rissoku.net/2013/06/makefile-%E5%88%A5%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AB%E4%B8%AD%E9%96%93%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB-%E8%87%AA%E5%8B%95%E4%BE%9D%E5%AD%98%E9%96%A2%E4%BF%82/)
+* [Makefileの書き方に関する備忘録](https://minus9d.hatenablog.com/entry/20140203/1391436293)
