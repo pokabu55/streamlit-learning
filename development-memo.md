@@ -1,12 +1,16 @@
 # develpment-memo
-以前に、Readme.md に書いてたものをこっちに引っ越し。
-Readme.md には、リポジトリの概要や使い方を中心に記載するため。
+## 概要
+* 以前に、Readme.md に書いてたものをこっちに引っ越し。
+* Readme.md には、リポジトリの概要や使い方を中心に記載するため。
 
-streamlitを勉強してみる
-
-まずは、下記 #2 のサイトで、Streamlit をサクッと勉強してみる！
+## READMEに書くべきこと
+* 下記リンクを参考にして、メモ的なものは書くのを止め、こっちに記載することに
+* [参考サイト１](https://cpp-learning.com/readme/)
+* [参考サイト２](https://think-simple-enjoy-life.com/599)
 
 # 自分で事前に調べたリンク集
+* まずは、下記 #2 のサイトで、Streamlit をサクッと勉強してみる！
+
 1. まずは、[公式](https://streamlit.io/)
 2. [ブラウザで動くリアルタイム画像/音声処理アプリをStreamlitでサクッと作る](https://zenn.dev/whitphx/articles/streamlit-realtime-cv-app)
 3. [Python だけで作る Web アプリケーション(フロントエンド編)](https://zenn.dev/alivelimb/books/python-web-frontend)
@@ -15,35 +19,36 @@ streamlitを勉強してみる
 6. [Streamlit入門 – ウィジェットの使い方(前編)](https://data-analytics.fun/2022/06/26/streamlit-widget-1/)
 7. [OpenCVとStreamlitを使用して粒子の画像処理を行う](https://enjoy-life-fullest.com/2022/04/07/%E3%80%90python%E3%80%91opencv%E3%81%A8streamlit%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E7%B2%92%E5%AD%90%E3%81%AE%E7%94%BB%E5%83%8F%E5%87%A6%E7%90%86%E3%82%92%E8%A1%8C%E3%81%86/)
 
-# PYTHON 環境構築
+# Python 環境構築
 ## 事前準備
 * Ubuntuなので、Python3は入ってる。 3.10.6 だった。
 * pip のインストール `sudo apt install python3-pip`
-## streamlit インストール
+## Streamlit インストール
 * streamlit のインストール `pip install streamlit`
 * `streamlit hello` で、サンプルのサイトが起動するらしいがエラー
 * エラーは `ImportError: cannot import name 'builder' from 'google.protobuf.internal'`
 * ぐぐると、[こんな](https://discuss.streamlit.io/t/streamlit-1-16-error-when-running-app-with-local-tunnel-possibly-related-to-incorrect-protobuf-version/35094) QAが見つかったか、如何に…。
 
-## streamlit の Workaround
+## Streamlit 実行のための Workaround
 * streamlit と protobuf を特定のバージョンにすることで回避できた
-* `pip install protobuf==3.19 streamlit==1.13` このバージョンの場合のみ、実行できた
+* `pip install protobuf==3.19 streamlit==1.13` とすることで実行可能に
 * protobuf 最初に入ってたのは、3.12.4 だったかな？
 * streamlit は、1.1.6.0 だった。
 * pip で、このバージョンにセットすることで無事に起動成功。
 * 初回起動時のみ、メールアドレスを聞かれる。が、無視してエンターを押すとブラウザから初期画面が表示された。
-* インストール〜実行まで完了。
+
 ### 参考サイト
 * [streamlitの起動時エラーの記事](https://community.deepnote.com/c/ask-anything/install-streamlit-in-deepnote)を参考にした。
 * 他には…[ここ](https://discuss.streamlit.io/t/streamlit-1-16-error-when-running-app-with-local-tunnel-possibly-related-to-incorrect-protobuf-version/35094)など
 
 ## webカメラを使う場合
+* 以下のインストールが必要
 * opencv のインストール：`pip install opencv-python`
 * streamlit-webrtc のインストール：`pip install streamlit-webrtc`
 
-## OpenCVについて
-* 下記のようにビルド版は4種類あるらしい。[出典。](https://a244.hateblo.jp/entry/2018/09/04/190000)
-* ここでは、サーバー版の-headless 版でもよいのかな？
+### OpenCVについて
+* 下記のようにビルド版は4種類あるらしい。[出典](https://a244.hateblo.jp/entry/2018/09/04/190000)。
+* ここでは、サーバー版の-headless 版でもよさげ。
 
 |packege name|explanation|
 |:---:|---|
@@ -62,9 +67,9 @@ streamlitを勉強してみる
 * [ここ](https://cafe-mickey.com/python/streamlit-6/)
 
 ## VSCode での拡張機能
-http://trelab.info/visual-studio-code/python-vscode%E3%81%A7autopep8%E3%82%92%E9%81%A9%E7%94%A8%E3%81%99%E3%82%8B/
-https://qiita.com/firedfly/items/00c34018581c6cec9b84
-https://qiita.com/momotar47279337/items/73157407ae824751afc4
+[pep8, frake8](http://trelab.info/visual-studio-code/python-vscode%E3%81%A7autopep8%E3%82%92%E9%81%A9%E7%94%A8%E3%81%99%E3%82%8B/)
+[](https://qiita.com/firedfly/items/00c34018581c6cec9b84)
+[](https://qiita.com/momotar47279337/items/73157407ae824751afc4)
 
 
 # 実装と実行
