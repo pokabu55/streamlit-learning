@@ -12,7 +12,7 @@ def image_processing(srcImagePIL, processName):
     # 画像処理のメイン関数的な
 
     # 処理画像をネイティブで処理できるようにファイル出力
-    tmpSrcFileName = "./tmp/srcImg.png"
+    tmpSrcFileName = "./tmp/srcImg.ppm"#png"
     tmpDstFileName = "./tmp/dstImg.png"
 
     # 何か処理してみるか

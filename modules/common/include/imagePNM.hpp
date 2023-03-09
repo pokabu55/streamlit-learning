@@ -40,6 +40,7 @@ public:
 	bool	savePPM(string fname);
 
 	bool	loadPGM( string saveName );
+	bool	loadPPM( string saveName );
 	bool	loadRAW( string fname, int imgW, int imgH );
 
 	bool	allocImgMem();

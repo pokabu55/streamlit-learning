@@ -448,6 +448,126 @@ bool CImagePNM::loadPGM( string saveName )
 	return true;
 }
 
+/*!
+  * @brief		PPM形式の画像をロードして配列へ
+  *
+  * @param[in]	saveName	ロードするファイル名
+  *
+  * @retval		true		処理成功
+  * @retval		false		処理失敗
+  *
+ */
+bool CImagePNM::loadPPM( string saveName )
+{
+	FILE *fp;
+	int ImgW, ImgH, ImgDpt;
+	bool IsBinary = false;
+
+	//errno_t error = fopen_s(&fp, saveName.c_str(), "rb");
+	//if (error != 0) return false;
+	fp = fopen(saveName.c_str(),"rb");
+	if (fp==NULL) return false;
+
+	//ヘッダ読み込み時のバッファ
+	char ss[256];
+	//ファイル形式
+	int type;
+
+	//-------------------- ヘッダ取得 ここから --------------------
+	fgets( ss, 255, fp );
+
+    // ファイル形式が違う
+	if( ss[0] != 'P' ) {
+		std::cout << "PGMのフォーマットが対応していません。" << std::endl;
+		return false;
+	}
+
+	//sscanf_s( ss, "P%d", &type, sizeof(type) );
+	sscanf( ss, "P%d", &type );
+
+	if( type == 3 ) {
+		IsBinary = false;
+	}
+	else if( type == 6 ) {
+		IsBinary = true;
+	}
+	else {
+		std::cout <<  "PGMのフォーマットが対応していません。" << std::endl;
+		return false;
+	}
+
+	// コメント読み飛ばし
+	do {
+		fgets( ss, 255, fp );
+	}
+	while( ss[0] == '#' );
+
+	//サイズ
+	//sscanf_s( ss, "%d%d", &ImgW, &ImgH, sizeof(ImgW), sizeof(ImgH) );
+	sscanf( ss, "%d%d", &ImgW, &ImgH );
+
+	// コメント読み飛ばし
+	do {
+		fgets( ss, 255, fp );
+	}
+	while( ss[0] == '#' );
+
+	//深さ
+	//sscanf_s( ss, "%d", &ImgDpt, sizeof(ImgDpt) );
+	sscanf( ss, "%d", &ImgDpt );
+
+	//サイズチェック
+	if( ImgW < 0 || ImgH < 0 || ImgDpt != 255 ) {
+		std::cout << "PGMのフォーマットが対応していません。" << std::endl;
+		return false;
+	}
+	//-------------------- ヘッダ取得 ここまで --------------------
+
+	//パリティ幅の計算
+	m_imgW = ImgW;
+	m_imgH = ImgH;
+	m_iDepth = 24;
+
+	/*if( ImgW % 4 != 0) {
+		PrtW = ( 4 - ImgW % 4 ) + ImgW;
+		m_iPrtW = PrtW;
+	}*/
+
+	if(!allocImgMem()) {
+		return false;
+	}
+
+	//サイズをメンバへ
+	//m_sImgSz.cx = ImgW;
+	//m_sImgSz.cy = ImgH;
+
+	//画像データのコピー（パリティ考慮無し）
+	for( int i = 0; i < ImgW * ImgH * 3; i++ ) {
+
+		if( IsBinary ) {
+			//fscanf_s(fp, "%c", &m_imgData[i]);
+			fscanf(fp, "%c", &m_imgData[i]);
+		}
+		else {
+			int ii;
+			//fscanf_s(fp, "%d", &ii);
+			fscanf(fp, "%d", &ii);
+			m_imgData[i] = (unsigned char)ii;
+		}
+    }
+
+	//画像データを上下逆さにしてコピー（パリティ考慮）
+	/*for( int y = 0; y < ImgH; y++ ) {
+		for( int x = 0; x < ImgW; x++ ) {
+			m_bPnmImg[ x + (ImgH - y-1) * PrtW ] = m_bBufImg[ x + y * ImgW ];
+		}
+	}*/
+
+	fclose(fp);
+
+	return true;
+}
+
 bool CImagePNM::loadRAW(string fileName, int imgW, int imgH)
 {
 	// 拡張子チェック
