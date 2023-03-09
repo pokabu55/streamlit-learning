@@ -8,25 +8,34 @@ else
 endif
 
 LIBS      = 
-INCLUDE   = -I./include
+INCLUDE   = -I./include -I../common/include
 TARGET    = ./bin/$(shell basename `readlink -f .`)
 SRCDIR    = ./src
+COMMONSRCDIR = ../common/src
+
 ifeq "$(strip $(SRCDIR))" ""
   SRCDIR  = .
 endif
-SOURCES   = $(wildcard $(SRCDIR)/*.cpp)
+SOURCES   = $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(COMMONSRCDIR)/*.cpp)
+$(warning SOURCES = $(SOURCES)) # 変数のコンソール出力
 OBJDIR    = ./obj
 ifeq "$(strip $(OBJDIR))" ""
   OBJDIR  = .
 endif
+$(warning OBJDIR = $(OBJDIR)) # 変数のコンソール出力
 OBJECTS   = $(addprefix $(OBJDIR)/, $(notdir $(SOURCES:.cpp=.o)))
+$(warning OBJECTS = $(OBJECTS)) # 変数のコンソール出力
 DEPENDS   = $(OBJECTS:.o=.d)
+$(warning DEPENDS = $(DEPENDS)) # 変数のコンソール出力
 
 $(TARGET): $(OBJECTS) $(LIBS)
 	$(COMPILER) -o $@ $^ $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	-mkdir -p $(OBJDIR)
+	$(COMPILER) $(CFLAGS) $(INCLUDE) -o $@ -c $<
+
+$(OBJDIR)/%.o: $(COMMONSRCDIR)/%.cpp
 	$(COMPILER) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
 all: clean $(TARGET)
