@@ -13,7 +13,7 @@ def image_processing(srcImagePIL, processName):
 
     # 処理画像をネイティブで処理できるようにファイル出力
     tmpSrcFileName = "./tmp/srcImg.ppm"#png"
-    tmpDstFileName = "./tmp/dstImg.png"
+    tmpDstFileName = "./tmp/dstImg.ppm"#png"
 
     # 何か処理してみるか
     #srcImageCV = pil2cv(srcImagePIL)
@@ -62,7 +62,7 @@ def main():
         image_processing(originalImagePIL, "threthold")
 
         # 結果表示
-        dstImagePIL = Image.open("./tmp/dstImg.png")
+        dstImagePIL = Image.open("./tmp/dstImg.ppm")
 
         # 2個めの画像を開けば勝手に縦並びになっとる
         st.image(dstImagePIL, caption="processed image", use_column_width=True)

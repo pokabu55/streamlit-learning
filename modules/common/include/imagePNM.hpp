@@ -32,6 +32,7 @@ public:
 	bool	clearMem();
 
 	bool	convertGray2RGB(CImagePNM &dst);
+	bool 	convertRGB2Gray();
 
 	bool	savePGM( unsigned char *imgData, int imgW, int imgH, string saveName, bool isBin=true );
 	bool	savePGMp2( unsigned char *imgData, int imgW, int imgH, string saveName );
@@ -40,11 +41,13 @@ public:
 	bool	savePPM(string fname);
 
 	bool	loadPGM( string saveName );
-	bool	loadPPM( string saveName );
+	bool	loadPPM( string saveName, bool convertGray );
 	bool	loadRAW( string fname, int imgW, int imgH );
 
 	bool	allocImgMem();
 	void	deleteImgMem();
+	bool	allocWorkMem24();
+	void	deleteWorkMem24();
 
 	bool	setImg(int x, int y, int brit8);
 	bool	setImg24(int x, int y, int R, int G, int B);
@@ -56,6 +59,7 @@ public:
 	int		m_imgH;
 	int		m_iDepth;
 	unsigned char *m_imgData;
+	unsigned char *workMem24_;
 };
 
 #endif

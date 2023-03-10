@@ -24,6 +24,7 @@ CImagePNM::CImagePNM(void)
 	m_imgH = -1;
 	m_imgData = NULL;
 	m_iDepth = 0;
+	workMem24_ = NULL;
 }
 
 /*!
@@ -37,6 +38,7 @@ CImagePNM::CImagePNM(void)
 CImagePNM::~CImagePNM(void)
 {
 	deleteImgMem();
+	deleteWorkMem24();
 }
 
 /*!
@@ -96,6 +98,32 @@ void CImagePNM::deleteImgMem()
 	if (m_imgData!=NULL) {
 		delete [] m_imgData;
 		m_imgData = NULL;
+	}
+}
+
+bool CImagePNM::allocWorkMem24()
+{
+	if (m_imgW <= 0 || m_imgH <= 0) return false;
+
+	deleteWorkMem24();
+
+	try {
+		workMem24_ = new unsigned char [m_imgW*m_imgH*3];
+	}
+	catch(...){
+		return false;
+	}
+
+	memset( workMem24_, 0, m_imgW*m_imgH*3 );
+
+	return true;
+}
+
+void CImagePNM::deleteWorkMem24()
+{
+	if (workMem24_!=NULL) {
+		delete [] workMem24_;
+		workMem24_ = NULL;
 	}
 }
 
@@ -234,13 +262,26 @@ bool CImagePNM::savePPM( string saveName )
 
 	(void) fprintf(fp, "P6\n%d %d\n255\n", W, H);
 
-	for (y=0; y < H; y++) {
-		for (x=0; x < W; x++) {
-			static unsigned char color[3];
-			color[0] = m_imgData[(x+y*W)*3+0];
-			color[1] = m_imgData[(x+y*W)*3+1];
-			color[2] = m_imgData[(x+y*W)*3+2];
-			(void) fwrite(color, 1, 3, fp);
+	static unsigned char color[3];
+
+	if (m_iDepth == 8) {
+		for (y=0; y < H; y++) {
+			for (x=0; x < W; x++) {
+				color[0] = m_imgData[x+y*W];
+				color[1] = color[0];
+				color[2] = color[0];
+				(void) fwrite(color, 1, 3, fp);
+			}
+		}
+	}
+	else {
+		for (y=0; y < H; y++) {
+			for (x=0; x < W; x++) {
+				color[0] = m_imgData[(x+y*W)*3+0];
+				color[1] = m_imgData[(x+y*W)*3+1];
+				color[2] = m_imgData[(x+y*W)*3+2];
+				(void) fwrite(color, 1, 3, fp);
+			}
 		}
 	}
 
@@ -452,12 +493,13 @@ bool CImagePNM::loadPGM( string saveName )
   * @brief		PPM形式の画像をロードして配列へ
   *
   * @param[in]	saveName	ロードするファイル名
+  * @param[in]	convertGray	グレイスケール変換フラグ
   *
   * @retval		true		処理成功
   * @retval		false		処理失敗
   *
  */
-bool CImagePNM::loadPPM( string saveName )
+bool CImagePNM::loadPPM( string saveName, bool convertGray )
 {
 	FILE *fp;
 	int ImgW, ImgH, ImgDpt;
@@ -564,6 +606,47 @@ bool CImagePNM::loadPPM( string saveName )
 	}*/
 
 	fclose(fp);
+
+	if (convertGray) {
+		if (!convertRGB2Gray()) return false;
+	}
+
+	return true;
+}
+
+bool CImagePNM::convertRGB2Gray()
+{
+	// すでにロードしているカラー画像をグレイスケールに変換する
+	if (m_iDepth != 24) return false;
+
+	// ワークメモリ
+	if (!allocWorkMem24()) return false;
+	memcpy(workMem24_, m_imgData, m_imgW*m_imgH*3);
+
+	// グレイ画像用にメモリを取り直す
+	m_iDepth = 8;
+	if (!allocImgMem()) return false;
+
+	int R, G, B;
+	int gray;
+	double dGray;
+	int W = m_imgW;
+	int W3 = m_imgW*3;
+	int H = m_imgH;
+	int x, y, x3;
+
+	// グレイに変換
+	for (y=0; y<H; y++) {
+		for (x=0, x3=0; x<W; x++, x3+=3) {
+			R = workMem24_[x3+y*W3];
+			G = workMem24_[x3+y*W3+1];
+			B = workMem24_[x3+y*W3+2];
+			gray = (int)(R * 0.3 + G * 0.59 + B * 0.11 + 0.5);
+			if (gray<0) gray = 0;
+			else if (gray>255) gray = 255;
+			m_imgData[x+y*W] = gray;
+		}
+	}
 
 	return true;
 }
