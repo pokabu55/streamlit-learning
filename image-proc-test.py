@@ -54,6 +54,10 @@ def main():
 
     # 縦並びでレイアウト
 
+    with st.sidebar:
+        scale = st.slider("resize ratio", 0.5, 2.0, 1.0)
+        st.write("Tresize ratio", scale)
+
     if uploaded_image is not None:
         print("uploaded_image is not None")
 
@@ -81,16 +85,16 @@ def main():
         # st.image(dstImagePIL, caption="processed image", use_column_width=True)
 
         # 画像の拡大縮小ボタン
-        scale = st.slider("画像の拡大縮小", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
+        # scale = st.slider("画像の拡大縮小", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
         # if st.button("拡大縮小を適用"):
-        print("拡大縮小を適用")
+        # print("拡大縮小を適用")
 
         # 画像の拡大縮小
         new_size = (int(width * scale), int(height * scale))
         resized_image = originalImagePIL.resize(new_size)
 
         # 拡大縮小後の画像を表示
-        st.image(resized_image, caption="resized image", use_column_width=True)
+        st.image(resized_image, caption="resized image", use_column_width=False)
 
 
 if __name__ == "__main__":
