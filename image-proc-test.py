@@ -46,6 +46,12 @@ def pil2cv(image):
     return new_image
 
 
+def reset_ratio():
+    st.session_state.ratio = 1.0
+    # https://docs.streamlit.io/library/advanced-features/session-state
+    # この説明を受けて、コールバックとした
+
+
 def main():
     print("main-0")
     uploaded_image = st.file_uploader("画像ファイルアップロード", type=["png", "jpg", "bmp"])
@@ -54,13 +60,16 @@ def main():
 
     # 縦並びでレイアウト
 
+    if "ratio" not in st.session_state:
+        st.session_state.ratio = 1.0
+
     with st.sidebar:
-        scale = st.slider("resize ratio", 0.5, 2.0, 1.0)
-        st.write("resize ratio", scale)
+        st.slider("resize ratio", 0.5, 2.0, key="ratio")
+        st.write("resize ratio", st.session_state.ratio)
 
         # ここに1．0倍にするボタンを置く
-        if st.button("1.0倍にする"):
-            scale = 1.0
+        st.button(label="1.0倍にする", on_click=reset_ratio)
+        # st.session_state.ratio = 1.0
 
     if uploaded_image is not None:
         print("uploaded_image is not None")
@@ -94,6 +103,7 @@ def main():
         # print("拡大縮小を適用")
 
         # 画像の拡大縮小
+        scale = st.session_state.ratio
         new_size = (int(width * scale), int(height * scale))
         resized_image = originalImagePIL.resize(new_size)
 
