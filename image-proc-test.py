@@ -56,7 +56,11 @@ def main():
 
     with st.sidebar:
         scale = st.slider("resize ratio", 0.5, 2.0, 1.0)
-        st.write("Tresize ratio", scale)
+        st.write("resize ratio", scale)
+
+        # ここに1．0倍にするボタンを置く
+        if st.button("1.0倍にする"):
+            scale = 1.0
 
     if uploaded_image is not None:
         print("uploaded_image is not None")
